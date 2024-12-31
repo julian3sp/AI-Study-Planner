@@ -39,11 +39,10 @@ export default function TaskForm() {
                 ))}
             </ul>
             <button onClick={ () => {
-                
 
             }
             }>
-
+                Submit
             </button>
         </>
     );
