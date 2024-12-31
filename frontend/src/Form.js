@@ -1,27 +1,50 @@
 import { useState } from 'react';
 
-let nextID = 0;
+let nextTaskID = 0; // Unique ID for tasks
 
-export default function Form(){
-    //hold user inputs
-    const [Name, setName] = useState('');
-    const [Tasks, setTasks] = useState([]);
+export default function TaskForm() {
+    // State to hold the current user input
+    const [taskInput, setTaskInput] = useState('');
+
+    // State to hold the list of tasks
+    const [taskList, setTaskList] = useState([]);
+
     return (
         <>
+            {/* Input field to capture the user's task */}
             <input
-            value ={Name}
-            onChange={event => setName(event.target.value)}
+                value={taskInput} // Controlled input tied to state
+                onChange={event => setTaskInput(event.target.value)} // Update state on input change
+                placeholder="Enter a topic" // Placeholder for user guidance
             />
+
+            {/* Button to add the task */}
             <button onClick={() => {
-                setTasks([
-                    ...Tasks, { id: nextID++, Name: Name}
-                ]);
-            }}>Add Item</button>
+                const isDuplicate = taskList.some(task => task.name === taskInput); // Check if task already exists
+                if (taskInput !== '' && !isDuplicate) {
+                    setTaskList([
+                        ...taskList,
+                        { id: nextTaskID++, name: taskInput } // Add new task with a unique ID
+                    ]);
+                    setTaskInput(''); // Clear input after adding
+                }
+            }}>
+                Add Task
+            </button>
+
+            {/* List of tasks */}
             <ul>
-                {Tasks.map(task => (
-                    <li key={task.id}>{task.Name}</li>
+                {taskList.map(task => (
+                    <li key={task.id}>{task.name}</li> // Display task name
                 ))}
             </ul>
+            <button onClick={ () => {
+                
+
+            }
+            }>
+
+            </button>
         </>
     );
-  }
+}

@@ -7,6 +7,7 @@ function App(){
     <div>
       <Header/>
       <p>This is your AI powered study planner!</p>
+      <p>Add topics youd like to study for along with deadlines, and we'll provide you with a full-proof study plan!</p>
       <Form/>
     </div>
   );
