@@ -9,6 +9,11 @@ export default function TaskForm() {
     // State to hold the list of tasks
     const [taskList, setTaskList] = useState([]);
 
+    const handleRemoveItem = (id) => {
+        const newItems = taskList.filter((task) => task.id !== id);
+        setTaskList(newItems);
+      };
+
     return (
         <>
             {/* Input field to capture the user's task */}
@@ -33,13 +38,15 @@ export default function TaskForm() {
             </button>
 
             {/* List of tasks */}
-            <ul>
+            <div class = "my-list">
+            <ul >
                 {taskList.map(task => (
-                    <li key={task.id}>{task.name}</li> // Display task name
+                    <li key={task.id}>{task.name} <button onClick={() => handleRemoveItem(task.id)}>x</button></li> // Display task name
                 ))}
             </ul>
+            </div>
             <button onClick={ () => {
-
+                //send post request to backend
             }
             }>
                 Submit
